@@ -1,0 +1,121 @@
+@font-face {
+    font-family: sanFran;
+    src: url(./SF-UI-Display-Regular.otf);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sanFran;
+    font-size:24px;
+}
+
+body {
+    background-color: grey;
+}
+
+#calculator {
+    /* margin: auto;
+    width: 500px;
+    height: 750px;
+    background-color: goldenrod;
+    display: flex;
+    flex-direction: column; */
+    display: grid;
+    height: 100vh;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1.5fr 1fr 1fr 1fr 1fr 1fr;
+
+    margin: auto;
+    /* width: 500px;
+    height: 750px; */
+    background-color: goldenrod;
+
+    grid-template-areas:
+        "display display display display"
+        "mainInput mainInput mainInput mainInput"
+        "mainInput mainInput mainInput mainInput"
+        "mainInput mainInput mainInput mainInput"
+        "mainInput mainInput mainInput mainInput"
+        "mainInput mainInput mainInput mainInput";
+    
+        grid-gap: 0.2rem;
+}
+
+#display {
+    background-color: royalblue;
+    grid-area: display;
+}
+
+#mainInput {
+    background-color: greenyellow;
+    grid-area: mainInput;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas:
+        "extra extra extra operator"
+        "number number number operator"
+        "number number number operator"
+        "number number number operator"
+        "zeroRow zeroRow zeroRow operator";
+}
+
+.button {
+    width: 88%;
+    height: 88%;
+    background-color: grey;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.4em;
+    align-self: center;
+    justify-self: center;
+} 
+
+
+
+#numbers {
+    grid-area: number;
+    background-color: brown;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+#zeroRow {
+    grid-area: zeroRow;
+    background-color: rebeccapurple;
+    display: flex;
+    justify-content: space-around;
+}
+
+#zeroRow.button:not(.zero) {
+    width: 29%;
+}
+
+.zero {
+    width: 62%;
+    border-radius: 80px;
+    justify-content: flex-start;
+    padding-left: 41px;
+}
+
+#operators {
+    grid-area: operator;
+    background-color:orchid;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+}
+
+#extras {
+    grid-area: extra;
+    background-color:rosybrown;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+}
