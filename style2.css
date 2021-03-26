@@ -17,7 +17,7 @@ body {
 
 #display {
     grid-area: display;
-    font-size: 5em;
+    font-size: 4em;
     padding-right: 32px;
     display: flex;
     align-items: center;
