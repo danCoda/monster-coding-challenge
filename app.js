@@ -207,87 +207,86 @@ function processInput(key) {
             updateDisplayWithIndex(0);
         }
     }
-}
 
-function resetCalculatorMemory() {
-    currentInputs = [];
-}
-
-function numberExistsAtIndex(i) {
-    return currentInputs[i];
-}
-
-function getCurrentTotal() {
-    let num1, num2, total;
-
-    try {
-        [num1, num2] = getValues();
-        [num1, num2].forEach(n => {
-            // Todo: Work out the percentages.
-        })
-    } catch (e) {
-        throw e;
+    function resetCalculatorMemory() {
+        currentInputs = [];
     }
-
-    total = getTotal();
-       
-    return total;
-
-    function getTotal() {
-        switch (currentInputs[1]) {
-            case "÷":
-                total = num1 / num2;
-                break;
-            case "×":
-                total = num1 * num2;
-                break;
-            case "−":
-                total = num1 - num2;
-                break;
-            case "+":
-                total = num1 + num2;
-                break;
+    
+    function numberExistsAtIndex(i) {
+        return currentInputs[i];
+    }
+    
+    function getCurrentTotal() {
+        let num1, num2, total;
+    
+        try {
+            [num1, num2] = getValues();
+            [num1, num2].forEach(n => {
+                // Todo: Work out the percentages.
+            })
+        } catch (e) {
+            throw e;
+        }
+    
+        total = getTotal();
+           
+        return total;
+    
+        function getTotal() {
+            let total;
+            switch (currentInputs[1]) {
+                case "÷":
+                    total = num1 / num2;
+                    break;
+                case "×":
+                    total = num1 * num2;
+                    break;
+                case "−":
+                    total = num1 - num2;
+                    break;
+                case "+":
+                    total = num1 + num2;
+                    break;
+            }
+            return total;
+        }
+    
+        function getValues() {
+            let valueIndexes = [0, 2];
+            let num1, num2;
+            valueIndexes.forEach(i => {
+                // If the input starts with "%" or "-%", is invalid. 
+                if (currentInputs[i].charAt(0) === "%" || currentInputs[i].charAt(0) === "-" && currentInputs[i].charAt(1) === "%") {
+                    throw "Error in the input";
+                } else {
+                    if (i === 0) {
+                        num1 = currentInputs[i];
+                    } else {
+                        num2 = currentInputs[i];
+                    }
+                }
+            });
+            return [num1, num2];
         }
     }
-
-    function getValues() {
-        let valueIndexes = [0, 2];
-        let num1, num2;
-        valueIndexes.forEach(i => {
-            // If the input starts with "%" or "-%", is invalid. 
-            if (currentInputs[i].charAt(0) === "%" || currentInputs[i].charAt(0) === "-" && currentInputs[i].charAt(1) === "%") {
-                throw "Error in the input";
-            } else {
-                if (i === 0) {
-                    num1 = currentInputs[i];
-                } else {
-                    num2 = currentInputs[i];
-                }
-            }
-        });
-        return [num1, num2];
+    
+    function addDigitAtIndex(i, key) {
+        if (!currentInputs[i]) currentInputs[i] = "";
+        currentInputs[i] += key;
+    }
+    
+    function updateDisplayWithIndex(i) {
+        display.innerHTML = currentInputs[i].toLocaleString();
+        display.setAttribute("data-value", currentInputs[i]);
+    }
+    
+    function updateDisplay(number) {
+        if (!isNaN(number)) { // If it's a number, including 0:
+            display.innerHTML = number.toLocaleString();
+            display.setAttribute("data-value", number.toLocaleString());
+        } else {
+            display.innerHTML = "";
+            display.removeAttribute("data-value");
+        }
     }
 }
-
-function addDigitAtIndex(i, key) {
-    if (!currentInputs[i]) currentInputs[i] = "";
-    currentInputs[i] += key;
-}
-
-function updateDisplayWithIndex(i) {
-    display.innerHTML = currentInputs[i].toLocaleString();
-    display.setAttribute("data-value", currentInputs[i]);
-}
-
-function updateDisplay(number) {
-    if (!isNaN(number)) { // If it's a number, including 0:
-        display.innerHTML = number.toLocaleString();
-        display.setAttribute("data-value", number.toLocaleString());
-    } else {
-        display.innerHTML = "";
-        display.removeAttribute("data-value");
-    }
-
-}
-
-document.querySelector("#numbers");
